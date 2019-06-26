@@ -10,20 +10,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
-    private final static String BASE_API_URL = "http://157.230.149.187/kkadmin/api/";
+    private final static String BASE_API_URL = "http://kkspinners.in/adminportal/api/";
     private static Retrofit retrofit = null;
     private static Gson gson = new GsonBuilder().create();
 
-    private static HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor()
+    private static HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    private static OkHttpClient.Builder okHttpClientBuilder=new OkHttpClient.Builder()
+    private static OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor);
 
-    private static OkHttpClient okHttpClient=okHttpClientBuilder.build();
+    private static OkHttpClient okHttpClient = okHttpClientBuilder.build();
 
-    public static <T> T createService(Class<T> serviceClass){
-        if(retrofit == null){
+    public static <T> T createService(Class<T> serviceClass) {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
                     .baseUrl(BASE_API_URL)
