@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:padding="@dimen/margin">
+
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/padding"
+        android:text="Special Remarks"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/heading"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtSpecial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/padding"
+        android:layout_marginRight="@dimen/margin"
+        android:background="@drawable/edittest"
+        android:padding="@dimen/padding"
+        android:textSize="@dimen/text" />
+
+    <Button
+        android:id="@+id/dilog_cancel"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSpecial"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/padding"
+        android:background="@drawable/buttonback"
+        android:text="Cancel"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/subheading"
+        android:textStyle="bold" />
+
+</RelativeLayout>

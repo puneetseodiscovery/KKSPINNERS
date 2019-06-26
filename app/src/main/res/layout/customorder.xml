@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/textOrder"
+        android:padding="@dimen/padding">
+
+        <LinearLayout
+            android:id="@+id/liner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/image"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/txtOrdername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/padding"
+                android:gravity="start"
+                android:text="Woman Shoes"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/subheading"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtOrderNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pad"
+                android:gravity="right"
+                android:text="12354d546das"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/subheading" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linaer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/padding"
+            android:layout_marginRight="@dimen/padding"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/txtOrderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/padding"
+                android:gravity="start"
+                android:text="Rs 64500.00"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/subheading"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtOrderWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pad"
+                android:gravity="right"
+                android:text="12346 KG"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/subheading" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/image2"
+        android:gravity="end"
+        android:paddingBottom="3dp"
+        android:text="View order"
+        android:textAllCaps="false"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/subheading" />
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/padding"
+        android:src="@drawable/ic_right" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/relative"
+        android:background="@color/colorGray" />
+
+</RelativeLayout>
