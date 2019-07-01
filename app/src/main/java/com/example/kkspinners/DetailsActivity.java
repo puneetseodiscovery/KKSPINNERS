@@ -72,6 +72,8 @@ public class DetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SpecialRemarksActivity.class);
                 intent.putExtra("Special", datum.getSpecialRemarks().toString());
                 startActivity(intent);
+
+
             }
         });
 

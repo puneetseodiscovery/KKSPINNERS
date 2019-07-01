@@ -46,6 +46,11 @@ public class OrderActivity extends AppCompatActivity {
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.frame, new OngoingFragment()).commit();
+
+        btnOngoing.setEnabled(false);
+        btnPending.setEnabled(true);
+
+
         btnOngoing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +59,8 @@ public class OrderActivity extends AppCompatActivity {
                 btnPending.setBackgroundColor(getResources().getColor(R.color.colorGray));
                 btnOngoing.setBackgroundColor(getResources().getColor(R.color.colorWhite));
 
-
+                btnOngoing.setEnabled(false);
+                btnPending.setEnabled(true);
                 manager.beginTransaction().replace(R.id.frame, new OngoingFragment()).commit();
             }
         });
@@ -69,6 +75,9 @@ public class OrderActivity extends AppCompatActivity {
                 btnOngoing.setTextColor(getResources().getColor(R.color.gray));
                 btnOngoing.setBackgroundColor(getResources().getColor(R.color.colorGray));
                 btnPending.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+
+                btnOngoing.setEnabled(true);
+                btnPending.setEnabled(false);
             }
         });
     }
