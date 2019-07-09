@@ -81,7 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
         viewInvCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://157.230.149.187/kkadmin/public/Invoices/" + datum.getInvCopy();
+                String url = "http://kkspinners.in/adminportal/public/Invoices/" + datum.getInvCopy();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
             }

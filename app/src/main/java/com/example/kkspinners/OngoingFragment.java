@@ -43,6 +43,7 @@ public class OngoingFragment extends Fragment {
     SharedPreferences sharedPreferences;
     String token;
     public static ArrayList<OrderApi.Datum> apiArrayList = new ArrayList<OrderApi.Datum>();
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     public OngoingFragment() {
@@ -60,9 +61,8 @@ public class OngoingFragment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
         token = "Bearer " + sharedPreferences.getString("Token", "");
 
-        getOrder();
 
-        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
+        swipeRefreshLayout = view.findViewById(R.id.swipe);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,12 +70,15 @@ public class OngoingFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
+
                         getOrder();
                     }
                 }, 1000);
             }
         });
+
+
+        getOrder();
 
         return view;
     }
@@ -84,13 +87,11 @@ public class OngoingFragment extends Fragment {
     private void getOrder() {
         final ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
         Call<OrderApi> call = apiInterface.orderApi(token, OrderActivity.Id);
-        final ProgressDialog dialog = ProgressBarClass.showProgressDialog(getContext(), "Please wait...");
-        dialog.show();
-
+        swipeRefreshLayout.setRefreshing(true);
         call.enqueue(new Callback<OrderApi>() {
             @Override
             public void onResponse(Call<OrderApi> call, Response<OrderApi> response) {
-                dialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful()) {
                     apiArrayList.clear();
 
@@ -111,7 +112,7 @@ public class OngoingFragment extends Fragment {
 
             @Override
             public void onFailure(Call<OrderApi> call, Throwable t) {
-                dialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

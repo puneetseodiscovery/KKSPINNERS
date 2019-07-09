@@ -44,7 +44,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://157.230.149.187/kkadmin/public/files/" + datum.getFileName();
+                String url = "http://kkspinners.in/adminportal/public/files/" + datum.getFileName();
                 Log.d("Url123", url);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 context.startActivity(browserIntent);

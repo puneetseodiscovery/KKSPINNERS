@@ -38,7 +38,7 @@ public class PendingFragment extends Fragment {
     PaddingAdapter adapter;
     String token;
     public static ArrayList<PendingOrderApi.Datum> apiArrayList = new ArrayList<PendingOrderApi.Datum>();
-
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public PendingFragment() {
 
@@ -58,9 +58,7 @@ public class PendingFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
 
 
-        getData();
-
-        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
+        swipeRefreshLayout = view.findViewById(R.id.swipe);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -68,12 +66,14 @@ public class PendingFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
+
                         getData();
                     }
                 }, 1000);
             }
         });
+
+        getData();
 
 
         return view;
@@ -83,14 +83,12 @@ public class PendingFragment extends Fragment {
     private void getData() {
         final ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
         Call<PendingOrderApi> call = apiInterface.getPendingApi(token, OrderActivity.Id);
-        final ProgressDialog dialog = ProgressBarClass.showProgressDialog(getContext(), "Please wait...");
-        dialog.show();
 
-
+        swipeRefreshLayout.setRefreshing(false);
         call.enqueue(new Callback<PendingOrderApi>() {
             @Override
             public void onResponse(Call<PendingOrderApi> call, Response<PendingOrderApi> response) {
-                dialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful()) {
                     apiArrayList.clear();
                     for (int i = 0; i < response.body().getData().size(); i++) {
@@ -108,7 +106,7 @@ public class PendingFragment extends Fragment {
 
             @Override
             public void onFailure(Call<PendingOrderApi> call, Throwable t) {
-                dialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

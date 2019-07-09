@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String Token;
+    SwipeRefreshLayout swipeRefreshLayout;
     public static ArrayList<String> contractId = new ArrayList<>();
     public static ArrayList<String> contractName = new ArrayList<>();
     public static ArrayList<String> contractUpdate = new ArrayList<>();
@@ -44,12 +45,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        swipeRefreshLayout = findViewById(R.id.swipe);
+
+
         sharedPreferences = getSharedPreferences("User", Context.MODE_PRIVATE);
         Token = "Bearer " + sharedPreferences.getString("Token", "");
         recyclerView = findViewById(R.id.recyclerView);
         toolbar = findViewById(R.id.tooolbar);
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu);
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getContract();
+                    }
+                }, 1000);
+            }
+        });
+
 
         getContract();
 
@@ -58,13 +76,10 @@ public class MainActivity extends AppCompatActivity {
     private void getContract() {
         ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
         Call<ContractApi> call = apiInterface.contractApi(Token, "application/json");
-        final ProgressDialog dialog = ProgressBarClass.showProgressDialog(this, "Please wait");
-        dialog.show();
-
         call.enqueue(new Callback<ContractApi>() {
             @Override
             public void onResponse(Call<ContractApi> call, Response<ContractApi> response) {
-                dialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equals(200)) {
                         clear();
@@ -87,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ContractApi> call, Throwable t) {
-
-                dialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -102,19 +116,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        getContract();
-                    }
-                }, 1000);
-            }
-        });
+
     }
 
     private void clear() {
