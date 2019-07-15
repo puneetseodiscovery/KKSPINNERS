@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.kkspinners"
+        applicationId "com.mandywebdesign.kkspinners"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
