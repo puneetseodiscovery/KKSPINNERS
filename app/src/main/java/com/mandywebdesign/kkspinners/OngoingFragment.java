@@ -35,6 +35,7 @@ public class OngoingFragment extends Fragment {
     SharedPreferences sharedPreferences;
     String token;
     public static ArrayList<OrderApi.Datum> apiArrayList = new ArrayList<OrderApi.Datum>();
+    public static ArrayList<OrderApi.ContractDetail> apiContract = new ArrayList<>();
     SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -86,8 +87,12 @@ public class OngoingFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful()) {
                     apiArrayList.clear();
-
+                    apiContract.clear();
                     if (response.body().getStatus().equals(200)) {
+                        for (int j = 0; j < response.body().getContractDetails().size(); j++) {
+                            apiContract.add(response.body().getContractDetails().get(j));
+                        }
+
                         for (int i = 0; i < response.body().getData().size(); i++) {
                             apiArrayList.add(response.body().getData().get(i));
                             setData(apiArrayList);

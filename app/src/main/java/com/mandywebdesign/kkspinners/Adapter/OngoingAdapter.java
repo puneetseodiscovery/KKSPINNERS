@@ -43,7 +43,7 @@ public class OngoingAdapter extends RecyclerView.Adapter<OngoingAdapter.ViewHold
         viewHolder.txtOrder.setText(datum.getProduct());
         viewHolder.txtPrice.setText(datum.getPrice());
         viewHolder.txtOrderNumber.setText(datum.getInvNo());
-        viewHolder.txtWeight.setText(datum.getQuantity() + " KG");
+        viewHolder.txtWeight.setText(datum.getQuantity() );
 
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

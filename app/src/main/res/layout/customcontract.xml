@@ -10,6 +10,7 @@
         android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/textOrder"
         android:padding="10dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -18,6 +19,7 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
+
             android:src="@drawable/ic_man"
             app:riv_oval="true" />
 
@@ -34,9 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Amit"
-                android:textStyle="bold"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/subheading" />
+                android:textSize="@dimen/subheading"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textKk"

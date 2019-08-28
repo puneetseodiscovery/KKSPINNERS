@@ -5,15 +5,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mandywebdesign.kkspinners.RetroModel.PendingOrderApi;
 
 public class PendingDetailsActivity extends AppCompatActivity {
     Toolbar toolbar;
-    TextView txtOrderName, txtInvNumber, txtOrderStatus, txtQuantity, txtPrice, txtCurrent, txtCreate, txtUpdate;
+    TextView txtOrderName, txtInvNumber, txtOrderStatus, txtQuantity, txtPrice, txtCurrent;
     RelativeLayout viewSpecial;
 
     @Override
@@ -36,24 +38,27 @@ public class PendingDetailsActivity extends AppCompatActivity {
         int i = Integer.parseInt(no);
 
         final PendingOrderApi.Datum datum = PendingFragment.apiArrayList.get(i);
+        PendingOrderApi.ContractDetail contractDetail = PendingFragment.apiContract.get(i);
 
         txtOrderName.setText(datum.getPenProduct());
-        txtInvNumber.setText("Inv Number : " + datum.getPSaleContNo());
-        txtOrderStatus.setText("Status : " + datum.getPenLcStatus());
+        txtInvNumber.setText("Contract Number : " + contractDetail.getContractNo());
+        txtOrderStatus.setText("Status : " + datum.getPenCurrentStatus());
         txtQuantity.setText(datum.getPenQuantity());
         txtPrice.setText(datum.getPenPrice());
-        txtCurrent.setText(datum.getPenCurrentStatus());
-        txtCreate.setText(datum.getCreatedAt());
-        txtUpdate.setText(datum.getUpdatedAt());
+        txtCurrent.setText(datum.getPenLcStatus());
 
 
         //view the specila remarks
         viewSpecial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SpecialRemarksActivity.class);
-                intent.putExtra("Special", datum.getPenSpecialRemarks().toString());
-                startActivity(intent);
+                if (TextUtils.isEmpty(datum.getPenSpecialRemarks())) {
+                    Toast.makeText(PendingDetailsActivity.this, "Special Remarks is Empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), SpecialRemarksActivity.class);
+                    intent.putExtra("Special", " " + datum.getPenSpecialRemarks().toString());
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -66,8 +71,6 @@ public class PendingDetailsActivity extends AppCompatActivity {
         txtQuantity = (TextView) findViewById(R.id.orderQuantity);
         txtPrice = (TextView) findViewById(R.id.orderPrice);
         txtCurrent = (TextView) findViewById(R.id.orderCstatus);
-        txtCreate = (TextView) findViewById(R.id.orderCreate);
-        txtUpdate = (TextView) findViewById(R.id.orderUpdate);
         viewSpecial = (RelativeLayout) findViewById(R.id.viewSpecial);
     }
 }

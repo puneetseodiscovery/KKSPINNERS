@@ -34,6 +34,7 @@ public class PendingFragment extends Fragment {
     PaddingAdapter adapter;
     String token;
     public static ArrayList<PendingOrderApi.Datum> apiArrayList = new ArrayList<PendingOrderApi.Datum>();
+    public static ArrayList<PendingOrderApi.ContractDetail> apiContract = new ArrayList<>();
     SwipeRefreshLayout swipeRefreshLayout;
 
     public PendingFragment() {
@@ -87,6 +88,12 @@ public class PendingFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful()) {
                     apiArrayList.clear();
+                    apiContract.clear();
+
+                    for (int j = 0; j < response.body().getContractDetails().size(); j++) {
+                        apiContract.add(response.body().getContractDetails().get(j));
+                    }
+
                     for (int i = 0; i < response.body().getData().size(); i++) {
                         apiArrayList.add(response.body().getData().get(i));
                         if (response.body().getData().get(i).equals(null)) {

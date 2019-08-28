@@ -8,15 +8,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mandywebdesign.kkspinners.RetroModel.OrderApi;
 
 public class DetailsActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView txtOrderName, txtInvNumber, txtOrderStatus, txtQuantity, txtPrice, txtEDT, txtAWB, txtnumberOfContainer, txtContationNo, txtUpdate;
+    TextView txtinvNumber;
     int i;
     RelativeLayout viewDocument, viewSpecial, viewInvCopy;
 
@@ -45,9 +48,12 @@ public class DetailsActivity extends AppCompatActivity {
         i = Integer.parseInt(a);
 
         final OrderApi.Datum datum = OngoingFragment.apiArrayList.get(i);
+        final OrderApi.ContractDetail contractDetail = OngoingFragment.apiContract.get(i);
+
         txtOrderName.setText(datum.getProduct());
-        txtInvNumber.setText("Inv Number : " + datum.getInvNo());
+        txtInvNumber.setText("Contract Number : " + contractDetail.getContractNo());
         txtOrderStatus.setText("Status : " + datum.getCurrentStatus());
+        txtinvNumber.setText(datum.getInvNo());
         txtQuantity.setText(datum.getQuantity());
         txtPrice.setText(datum.getPrice());
         txtEDT.setText(datum.getEtd());
@@ -67,9 +73,13 @@ public class DetailsActivity extends AppCompatActivity {
         viewSpecial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SpecialRemarksActivity.class);
-                intent.putExtra("Special", datum.getSpecialRemarks().toString());
-                startActivity(intent);
+                if (!TextUtils.isEmpty(datum.getSpecialRemarks())) {
+                    Intent intent = new Intent(getApplicationContext(), SpecialRemarksActivity.class);
+                    intent.putExtra("Special", " " + datum.getSpecialRemarks().toString());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(DetailsActivity.this, "Special Remarks is Empty", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
@@ -107,6 +117,7 @@ public class DetailsActivity extends AppCompatActivity {
         txtOrderName = (TextView) findViewById(R.id.orderName);
         txtInvNumber = (TextView) findViewById(R.id.orderNumber);
         txtOrderStatus = (TextView) findViewById(R.id.orderStatus);
+        txtinvNumber = (TextView) findViewById(R.id.invNumber);
         txtQuantity = (TextView) findViewById(R.id.orderQuantity);
         txtPrice = (TextView) findViewById(R.id.orderPrice);
         txtEDT = (TextView) findViewById(R.id.orderEDT);

@@ -4,7 +4,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SpecialRemarksActivity extends AppCompatActivity {
 
@@ -28,8 +30,12 @@ public class SpecialRemarksActivity extends AppCompatActivity {
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
             getSupportActionBar().setTitle("Special Remarks");
         }
+        if (TextUtils.isEmpty(getIntent().getStringExtra("Special"))) {
 
-        textView.setText(getIntent().getStringExtra("Special"));
+            Toast.makeText(this, "Special Remarks is Empty", Toast.LENGTH_SHORT).show();
+        } else {
+            textView.setText(getIntent().getStringExtra("Special"));
+        }
     }
 
     @Override

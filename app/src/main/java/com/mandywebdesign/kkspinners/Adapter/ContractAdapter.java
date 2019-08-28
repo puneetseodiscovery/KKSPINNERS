@@ -14,6 +14,7 @@ import com.mandywebdesign.kkspinners.MainActivity;
 import com.mandywebdesign.kkspinners.OrderActivity;
 import com.mandywebdesign.kkspinners.R;
 
+
 public class ContractAdapter extends RecyclerView.Adapter<ContractAdapter.ViewHolder> {
     Context context;
 

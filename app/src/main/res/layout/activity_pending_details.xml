@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pad"
-            android:text="Inv Number"
+            android:text="Contract No"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text" />
 
@@ -77,7 +77,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="120 KG"
+            android:text=""
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text"
             android:textStyle="bold" />
@@ -112,7 +112,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="25000.00"
+            android:text=""
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text"
             android:textStyle="bold" />
@@ -137,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Current Status :"
+            android:text="LC/TT Status :"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text" />
 
@@ -147,82 +147,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="da2455"
+            android:text=""
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/padding"
-        android:background="@color/colorGray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/padding"
-        android:layout_marginTop="@dimen/padding"
-        android:layout_marginRight="@dimen/padding"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Create At:"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text" />
-
-        <TextView
-            android:id="@+id/orderCreate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="da2455"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/padding"
-        android:background="@color/colorGray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/padding"
-        android:layout_marginTop="@dimen/padding"
-        android:layout_marginRight="@dimen/padding"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Update At:"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text" />
-
-        <TextView
-            android:id="@+id/orderUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="25"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
